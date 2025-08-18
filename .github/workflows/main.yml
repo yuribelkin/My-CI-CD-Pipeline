@@ -23,14 +23,14 @@ jobs:
         run: npm test
 
   build-and-run:
-      runs-on: ubuntu-latest
-      needs: test
-      steps:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Build Docker image
         run: docker build -t my-app .
 
-      - name: Run container
-        run: docker run --rm -p 3000:3000 my-app
+      - name: Run container in detached mode
+        run: docker run -d --name my-app -p 3000:3000 my-app
